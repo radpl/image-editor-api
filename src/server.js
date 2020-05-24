@@ -1,4 +1,6 @@
 const express = require("express");
+require("./db/connection");
+
 const cors = require("cors");
 const checkJwt = require("./middleware/auth");
 

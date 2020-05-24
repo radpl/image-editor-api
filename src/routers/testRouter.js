@@ -5,14 +5,14 @@ const checkJwt = require("../middleware/auth");
 const router = new express.Router();
 
 //public
-app.get("/api/public", (req, res) => {
+router.get("/api/public", (req, res) => {
   res.send({
     msg: "You have accessed public endpoint!"
   });
 });
 
 //secured
-app.get("/api/secured", checkJwt, (req, res) => {
+router.get("/api/secured", checkJwt, (req, res) => {
   res.send({
     msg: "Your Access Token was successfully validated!"
   });

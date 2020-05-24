@@ -1,12 +1,12 @@
 const express = require("express");
-const ImageEditor = require("../models/image");
+const EditorImage = require("../models/image");
 const checkJwt = require("../middleware/auth");
 
 const router = new express.Router();
 
 //###################### POST ############################
 router.post("/images", checkJwt, async (req, res) => {
-  const image = new ImageEditor({
+  const image = new EditorImage({
     ...req.body,
     owner: req.user._id
   });
@@ -31,7 +31,7 @@ router.get("/images", async (req, res) => {
 
 //######################## GET ###########################
 router.get("/user/images", checkJwt, async (req, res) => {
-  const userId = req.user._id;
+  //const userId = req.user._id;
   try {
     await req.user.populate("images").execPopulate();
     res.send(req.user.images);
