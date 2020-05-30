@@ -13,7 +13,7 @@ const app = express();
 const port = process.env.PORT || 5002;
 
 // Accept cross-origin requests from the frontend app
-app.use(cors({ origin: 'http://localhost:' + port }));
+app.use(cors({ origin: ['http://localhost:' + port, 'http://localhost:3000', 'https://www.alwera.pl'] }));
 app.use(express.json());
 
 //######### ROUTERS ############

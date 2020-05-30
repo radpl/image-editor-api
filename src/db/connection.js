@@ -1,8 +1,9 @@
+const config = require("../config/config");
 const mongoose = require("mongoose");
 
 //connection
-const connectionURL = "mongodb://127.0.0.1:27017";
-const databaseName = "image-editor";
+const connectionURL = config.connectionURL;
+const databaseName = config.databaseName;
 
 mongoose.connect(connectionURL + "/" + databaseName, {
   useNewUrlParser: true,

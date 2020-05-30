@@ -8,7 +8,22 @@ const router = new express.Router();
 router.get("/users/me", checkJwt, async (req, res) => {
   res.send(req.user);
 });
-
+//######################## POST ##########################
+router.post("/users/signup", checkJwt, async (req, res) => {
+  console.log(req.body);
+  const user = new User(req.body);
+  const exists = await User.findOne({ email: user.email });
+  if (!exists) {
+    try {
+      await user.save();
+      res.status(201).send({ user });
+    } catch (e) {
+      res.status(400).send(e);
+    }
+  } else {
+    res.status(201).send({ exists })
+  }
+});
 //######################## POST ##########################
 router.post("/users", async (req, res) => {
   const user = new User(req.body);
