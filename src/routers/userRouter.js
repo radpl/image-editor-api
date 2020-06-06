@@ -5,11 +5,11 @@ const checkJwt = require("../middleware/auth");
 const router = new express.Router();
 
 //######################## GET ###########################
-router.get("/users/me", checkJwt, async (req, res) => {
+router.get("/api/users/me", checkJwt, async (req, res) => {
   res.send(req.user);
 });
 //######################## POST ##########################
-router.post("/users/signup", checkJwt, async (req, res) => {
+router.post("/api/users/signup", checkJwt, async (req, res) => {
   console.log(req.body);
   const user = new User(req.body);
   const exists = await User.findOne({ email: user.email });
@@ -25,7 +25,7 @@ router.post("/users/signup", checkJwt, async (req, res) => {
   }
 });
 //######################## POST ##########################
-router.post("/users", async (req, res) => {
+router.post("/api/users", async (req, res) => {
   const user = new User(req.body);
   try {
     await user.save();
@@ -36,7 +36,7 @@ router.post("/users", async (req, res) => {
 });
 
 //######################## GET ###########################
-router.get("/users", async (req, res) => {
+router.get("/api/users", async (req, res) => {
   try {
     const users = await User.find({});
     res.send(users);
@@ -46,7 +46,7 @@ router.get("/users", async (req, res) => {
 });
 
 //######################## GET BY ID #####################
-router.get("/users/:id", async (req, res) => {
+router.get("/api/users/:id", async (req, res) => {
   const _id = req.params.id;
   try {
     const user = await User.findById(_id);
@@ -60,7 +60,7 @@ router.get("/users/:id", async (req, res) => {
 });
 
 //######################## UPDATE ########################
-router.patch("/users/me", checkJwt, async (req, res) => {
+router.patch("/api/users/me", checkJwt, async (req, res) => {
   const user = req.user;
   const userUpdate = req.body;
 
@@ -85,7 +85,7 @@ router.patch("/users/me", checkJwt, async (req, res) => {
 });
 
 //######################## DELETE ########################
-router.delete("/users/me", checkJwt, async (req, res) => {
+router.delete("/api/users/me", checkJwt, async (req, res) => {
   const user = req.user;
   try {
     await user.remove();
