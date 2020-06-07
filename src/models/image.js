@@ -4,7 +4,7 @@ const imageSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: true,
+      required: false,
       trim: true
     },
     description: {
@@ -14,6 +14,9 @@ const imageSchema = new mongoose.Schema(
     },
     logos: {},
     texts: {},
+    thumbnail: {
+      type: Buffer
+    },
     owner: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
@@ -24,6 +27,17 @@ const imageSchema = new mongoose.Schema(
     timestamps: true
   }
 );
+
+imageSchema.set('toObject', { virtuals: true });
+imageSchema.set('toJSON', { virtuals: true });
+
+imageSchema.virtual("logo", {
+  ref: "Logo",
+  localField: "_id",
+  foreignField: "image",
+  justOne: false
+});
+
 // Define a model
 const EditorImage = mongoose.model("Image", imageSchema);
 

@@ -6,10 +6,16 @@ const router = new express.Router();
 
 //###################### POST ############################
 router.post("/api/images", checkJwt, async (req, res) => {
-  console.log(req.body);
+  //console.log(req.body);
+  const data = req.body['thumbnail'];
+  const split = data.split(',');
+  const base64string = split[1];
+  const buffer = Buffer.from(base64string, 'base64');
+
   const image = new EditorImage({
     ...req.body.image,
-    owner: req.body.user._id
+    owner: req.body.user._id,
+    thumbnail: buffer
   });
 
   try {
@@ -21,9 +27,11 @@ router.post("/api/images", checkJwt, async (req, res) => {
 });
 
 //######################## GET ###########################
-router.get("/api/images", async (req, res) => {
+router.get("/api/:id/images", async (req, res) => {
+  const _id = req.params.id;
+  console.log(_id);
   try {
-    const images = await EditorImage.find({});
+    const images = await EditorImage.find({ owner: _id });
     res.send(images);
   } catch (e) {
     res.status(500).send();

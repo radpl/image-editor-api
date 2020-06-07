@@ -21,7 +21,11 @@ router.post("/api/users/signup", checkJwt, async (req, res) => {
       res.status(400).send(e);
     }
   } else {
-    res.status(201).send({ exists })
+    //exists.toObject({ virtuals: true });
+    const user = await exists.populate("images").execPopulate();
+    //user.toObject({ virtuals: true })
+    console.log(user);
+    res.status(201).send({ user });
   }
 });
 //######################## POST ##########################

@@ -1,21 +1,24 @@
 const mongoose = require("mongoose");
 
-const imageSchema = new mongoose.Schema(
+const logoSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: true,
+      required: false,
       trim: true
     },
     description: {
       type: String,
-      required: true,
+      required: false,
       trim: true
     },
-    owner: {
+    logos: {
+      type: [Buffer]
+    },
+    image: {
       type: mongoose.Schema.Types.ObjectId,
-      required: true,
-      ref: "User"
+      required: false,
+      ref: "Image"
     }
   },
   {
@@ -23,7 +26,7 @@ const imageSchema = new mongoose.Schema(
   }
 );
 // Define a model
-const EditorImage = mongoose.model("Image", imageSchema);
+const LogoImage = mongoose.model("Logo", logoSchema);
 
 
-module.exports = EditorImage;
+module.exports = LogoImage;

@@ -24,10 +24,14 @@ const userSchema = new mongoose.Schema(
   }
 );
 
+userSchema.set('toObject', { virtuals: true });
+userSchema.set('toJSON', { virtuals: true });
+
 userSchema.virtual("images", {
   ref: "Image",
   localField: "_id",
-  foreignField: "owner"
+  foreignField: "owner",
+  justOne: false
 });
 
 //Delete user images when user is removed
