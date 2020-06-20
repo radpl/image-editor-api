@@ -12,7 +12,7 @@ const backgroundRouter = require("./routers/backgroundRouter");
 
 // Create a new Express app
 const app = express();
-const port = process.env.PORT || 5002;
+const port = process.env.PORT || 5001;
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.json({ limit: '5mb' }));
