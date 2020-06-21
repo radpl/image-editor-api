@@ -29,7 +29,7 @@ router.post("/api/logos", async (req, res) => {
 //######################## GET ###########################
 router.get("/api/logos/:id", async (req, res) => {
   const _id = req.params.id;
-  console.log("/api/logos/" + _id)
+  //console.log("/api/logos/" + _id)
   //console.log(_id);
   try {
     const list = await Logo.find({ image: _id });

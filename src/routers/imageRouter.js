@@ -29,7 +29,7 @@ router.post("/api/images", checkJwt, async (req, res) => {
 //######################## GET ###########################
 router.get("/api/:id/images", async (req, res) => {
   const _id = req.params.id;
-  console.log(_id);
+  //console.log(_id);
   try {
     const images = await EditorImage.find({ owner: _id });
     res.send(images);

@@ -29,7 +29,7 @@ router.post("/api/backgrounds", async (req, res) => {
 //######################## GET ###########################
 router.get("/api/backgrounds/:id", async (req, res) => {
   const _id = req.params.id;
-  console.log("/api/backgrounds/" + _id);
+  //console.log("/api/backgrounds/" + _id);
 
   try {
     const list = await Background.find({ image: _id });

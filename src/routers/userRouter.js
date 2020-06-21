@@ -10,7 +10,7 @@ router.get("/api/users/me", checkJwt, async (req, res) => {
 });
 //######################## POST ##########################
 router.post("/api/users/signup", checkJwt, async (req, res) => {
-  console.log(req.body);
+  //console.log(req.body);
   const user = new User(req.body);
   const exists = await User.findOne({ email: user.email });
   if (!exists) {
@@ -24,7 +24,7 @@ router.post("/api/users/signup", checkJwt, async (req, res) => {
     //exists.toObject({ virtuals: true });
     const user = await exists.populate("images").execPopulate();
     //user.toObject({ virtuals: true })
-    console.log(user);
+    //console.log(user);
     res.status(201).send({ user });
   }
 });

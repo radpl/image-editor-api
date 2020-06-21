@@ -14,6 +14,10 @@ const imageSchema = new mongoose.Schema(
     },
     logos: {},
     texts: {},
+    selectedBg: {
+      type: Number,
+      required: false,
+    },
     thumbnail: {
       type: Buffer
     },
